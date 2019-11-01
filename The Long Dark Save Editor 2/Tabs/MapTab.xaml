@@ -3,7 +3,8 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        mc:Ignorable="d" Loaded="UserControl_Loaded" Height="1832.315" Width="2173.66">
+        d:DesignHeight="600" d:DesignWidth="600"
+        mc:Ignorable="d" Loaded="UserControl_Loaded">
     <UserControl.Resources>
         <Image x:Key="CoastalRegion" Source="../Images/CoastalHighwaySF.png"></Image>
         <Image x:Key="LakeRegion" Source="../Images/MysteryLakeSF.png"></Image>
@@ -18,50 +19,28 @@
         <Image x:Key="RiverValleyRegion" Source="../Images/HushedRiverValleySF.png"></Image>
 
     </UserControl.Resources>
-    <Grid x:Name="gd">
-        <Viewbox x:Name="viewLayer" HorizontalAlignment="Left" VerticalAlignment="Top" Height="1832" Width="2174">
-            <Canvas x:Name="viewCanvas" Height="1832" Width="2174">
-                <Image x:Name="map" Source="../Images/MysteryLakeSF.png" Stretch="Fill" Canvas.Left="0" Canvas.Top="0" Height="1832" Width="2174" IsEnabled="False">
-                </Image>
-            </Canvas>
-        </Viewbox>
-
-        <Canvas x:Name="canvas" MouseWheel="canvas_MouseWheel" Background="White" ClipToBounds="True" MouseMove="canvas_MouseMove"  
-                MouseLeftButtonUp="canvas_MouseLeftButtonUp" MouseLeftButtonDown="canvas_MouseLeftButtonDown" d:IsHidden="True">
-            <Image x:Name="mapImage" Source="..\Images/CoastalHighwaySF.png" Canvas.Top="0" Canvas.Left="0" 
-                    Height="2065" Width="2687" Stretch="Fill" d:IsHidden="True">
+    <Grid>
+        <Canvas Name="canvas" MouseWheel="canvas_MouseWheel" Background="White" ClipToBounds="True" MouseMove="canvas_MouseMove"  
+            MouseLeftButtonUp="canvas_MouseLeftButtonUp" MouseLeftButtonDown="canvas_MouseLeftButtonDown">
+            <Image Name="mapImage" Source="..\Images/CoastalHighwaySF.png" Canvas.Top="0" Canvas.Left="0" 
+               Height="2065" Width="2687" Stretch="Fill">
                 <Image.RenderTransform >
                     <ScaleTransform x:Name="scale" ScaleX="1" ScaleY="1" />
                 </Image.RenderTransform>
             </Image>
-            <Image x:Name="player" Source="../Images/location-indicator.png" Canvas.Top="20" Canvas.Left="20" 
-                    Height="32" Width="32" Stretch="Fill" d:IsHidden="True">
+            <Image Name="player" Source="../Images/location-indicator.png" Canvas.Top="20" Canvas.Left="20" 
+               Height="32" Width="32" Stretch="Fill">
                 <Image.RenderTransform >
                     <TranslateTransform X="-16" Y="-32" />
                 </Image.RenderTransform>
             </Image>
-            <Label x:Name="scaleLabel" Content="Label" d:IsHidden="True"/>
-            <Label x:Name="playerLabel" Content="Label" Canvas.Top="20" d:IsHidden="True"/>
-            <Viewbox x:Name="view" Height="100" Width="100" d:IsHidden="True">
-                <Viewbox.RenderTransform >
-                    <ScaleTransform x:Name="scaleVB" ScaleX="1" ScaleY="1" />
-                </Viewbox.RenderTransform>
-                <Canvas x:Name="rbLayer" Height="100" Width="100">
-                    <Canvas.RenderTransform >
-                        <ScaleTransform x:Name="scaleRBLayer" ScaleX="1" ScaleY="1" />
-                    </Canvas.RenderTransform>
-                    <RadioButton x:Name="rb1" Canvas.Left="153" Canvas.Top="216"/>
-                    <RadioButton x:Name="rb2" Canvas.Left="253" Canvas.Top="216"/>
-                </Canvas>
-            </Viewbox>
-            <RadioButton x:Name="rb1_Copy" Canvas.Left="153" Canvas.Top="216" d:IsHidden="True">
+            <RadioButton Content="BarnA" Canvas.Left="153" Canvas.Top="216">
                 <RadioButton.RenderTransform >
-                    <ScaleTransform x:Name="scaleR1" ScaleX="1" ScaleY="1" />
+                    <ScaleTransform x:Name="scaleR" ScaleX="1" ScaleY="1" />
                 </RadioButton.RenderTransform>
             </RadioButton>
         </Canvas>
-        <TextBlock x:Name="canvasLabel" Style="{StaticResource MaterialDesignDisplay3TextBlock}" Foreground="{StaticResource MaterialDesignBody}" VerticalAlignment="Center" HorizontalAlignment="Center" d:IsHidden="True"><Run Text="asdasd"/></TextBlock>
-
+        <TextBlock Name="canvasLabel" Style="{StaticResource MaterialDesignDisplay3TextBlock}" Foreground="{StaticResource MaterialDesignBody}" VerticalAlignment="Center" HorizontalAlignment="Center">asdasd</TextBlock>
     </Grid>
 
 </UserControl>
