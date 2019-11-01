@@ -1578,4 +1578,10 @@
   <data name="AfflictionType_FrostbiteDamage" xml:space="preserve">
     <value>Урон он холода</value>
   </data>
+  <data name="Badges4DON2019CheckBox" xml:space="preserve">
+    <value>Значки 4DON2019 разблокированы</value>
+  </data>
+  <data name="Badges4DONCheckBox" xml:space="preserve">
+    <value>Значки 4DON разблокированы</value>
+  </data>
 </root>
