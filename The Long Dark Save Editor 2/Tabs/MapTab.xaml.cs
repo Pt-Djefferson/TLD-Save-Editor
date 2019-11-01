@@ -3,6 +3,7 @@ using System.Diagnostics;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
+using System.Windows.Media;
 using The_Long_Dark_Save_Editor_2.Helpers;
 
 namespace The_Long_Dark_Save_Editor_2.Tabs
@@ -19,6 +20,11 @@ namespace The_Long_Dark_Save_Editor_2.Tabs
         private Point playerPosition;
 
         private string region;
+
+        private ScaleTransform rbScaleTransform;
+        private TranslateTransform rbTranslateTransform;
+
+        private RadioButton combo;
 
         public MapTab()
         {
@@ -98,8 +104,42 @@ namespace The_Long_Dark_Save_Editor_2.Tabs
             scale.ScaleX = Math.Max(Math.Min(wScale, hScale), 0.5);
             scale.ScaleY = Math.Max(Math.Min(wScale, hScale), 0.5);
 
-            SetPosition(0, 0);
+            rbScaleTransform = new ScaleTransform();
+            rbTranslateTransform = new TranslateTransform();
+            TransformGroup rbTransformGroup = new TransformGroup();
+            rbTransformGroup.Children.Add(rbScaleTransform);
+            rbTransformGroup.Children.Add(rbTranslateTransform);
 
+            int zOrder = Canvas.GetZIndex(mapImage);
+/*            foreach (UIElement child in canvas.Children)
+            {
+                child.
+            }*/
+            for (int i = 0; i < canvas.Children.Count; i++)
+            {
+                if (canvas.Children[i] is RadioButton)
+                {
+                    canvas.Children.RemoveAt(i);
+                }
+            }
+            combo = new RadioButton();
+            canvas.Children.Add(combo);
+            combo.Visibility = Visibility.Visible;
+            Canvas.SetZIndex(combo, (int)99);
+            combo.Content = "";
+            combo.Background = new SolidColorBrush(Color.FromRgb(255, 0, 0));
+            combo.RenderTransformOrigin = new Point(0.5, 0.5);
+            combo.RenderTransform = rbTransformGroup;
+
+            rbScaleTransform.ScaleX = scale.ScaleX;
+            rbScaleTransform.ScaleY = scale.ScaleY;
+            
+            //rbTranslateTransform.X = 30;
+            //rbTranslateTransform.Y = 30;
+
+            SetPosition(0, 0);
+            Canvas.SetLeft(combo, ((-1197.492 * mapInfo.pixelsPerCoordinate + mapInfo.origo.X) * scale.ScaleX + Canvas.GetLeft(mapImage)) - combo.ActualWidth / 2);
+            Canvas.SetTop(combo, ((998.6943 * -mapInfo.pixelsPerCoordinate + mapInfo.origo.Y) * scale.ScaleY + Canvas.GetTop(mapImage)) - combo.ActualHeight / 2);
         }
 
         private void canvas_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
@@ -158,6 +198,12 @@ namespace The_Long_Dark_Save_Editor_2.Tabs
             scale.ScaleX += zoom;
             scale.ScaleY += zoom;
 
+            scaleR.ScaleX += zoom;
+            scaleR.ScaleY += zoom;
+
+            rbScaleTransform.ScaleX += zoom;
+            rbScaleTransform.ScaleY += zoom;
+
             var x = -centerX * scale.ScaleX + canvas.ActualWidth / 2;
             var y = -centerY * scale.ScaleY + canvas.ActualHeight / 2;
             SetPosition(x, y);
@@ -169,6 +215,14 @@ namespace The_Long_Dark_Save_Editor_2.Tabs
             Canvas.SetTop(mapImage, y);
 
             UpdatePlayerPosition(x, y);
+
+            //rbTranslateTransform.X = x;
+            //rbTranslateTransform.Y = y;
+
+            //var xRB = (playerPosition.X * mapInfo.pixelsPerCoordinate + mapInfo.origo.X) * scale.ScaleX + Canvas.GetLeft(mapImage);
+            //var yRB = (playerPosition.Y * -mapInfo.pixelsPerCoordinate + mapInfo.origo.Y) * scale.ScaleY + Canvas.GetTop(mapImage);
+            Canvas.SetLeft(combo, ((-1197.492 * mapInfo.pixelsPerCoordinate + mapInfo.origo.X) * scale.ScaleX + Canvas.GetLeft(mapImage)) - combo.ActualWidth / 2);
+            Canvas.SetTop(combo, ((998.6943 * -mapInfo.pixelsPerCoordinate + mapInfo.origo.Y) * scale.ScaleY + Canvas.GetTop(mapImage)) - combo.ActualHeight / 2);
 
             if (MainWindow.Instance.CurrentSave == null)
                 return;

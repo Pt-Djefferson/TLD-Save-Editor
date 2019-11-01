@@ -34,6 +34,11 @@
                     <TranslateTransform X="-16" Y="-32" />
                 </Image.RenderTransform>
             </Image>
+            <RadioButton Content="BarnA" Canvas.Left="153" Canvas.Top="216">
+                <RadioButton.RenderTransform >
+                    <ScaleTransform x:Name="scaleR" ScaleX="1" ScaleY="1" />
+                </RadioButton.RenderTransform>
+            </RadioButton>
         </Canvas>
         <TextBlock Name="canvasLabel" Style="{StaticResource MaterialDesignDisplay3TextBlock}" Foreground="{StaticResource MaterialDesignBody}" VerticalAlignment="Center" HorizontalAlignment="Center">asdasd</TextBlock>
     </Grid>
