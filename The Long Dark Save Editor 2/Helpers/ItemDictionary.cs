@@ -173,7 +173,6 @@ namespace The_Long_Dark_Save_Editor_2.Helpers
             AddItemInfo("GEAR_TomatoSoupCan", ItemCategory.Food, @"{""FoodItem"": {""m_CaloriesRemainingProxy"": 300}, ""SmashableItem"": {}}");
             AddItemInfo("GEAR_WaterSupplyNotPotable", ItemCategory.Food, @"{""WaterSupply"":{""m_VolumeProxy"": 1}}", true);
             AddItemInfo("GEAR_WaterSupplyPotable", ItemCategory.Food, @"{""WaterSupply"":{""m_VolumeProxy"": 1}}", true);
-            //TODO: четверти туш не добавляются в инвентарь, да и тушка зайца видимо тоже, возможно не хватает указания кол-ва шкур и кишок
             AddItemInfo("GEAR_WolfQuarter", ItemCategory.Food, @"{m_WeightKG: 1, ""BodyHarvest"": {m_MeatAvailableKG: 1, m_Condition: 100}}");
             AddItemInfo("GEAR_BearQuarter", ItemCategory.Food, @"{m_WeightKG: 1, ""BodyHarvest"": {m_MeatAvailableKG: 1, m_Condition: 100}}");
             AddItemInfo("GEAR_StagQuarter", ItemCategory.Food, @"{m_WeightKG: 1, ""BodyHarvest"": {m_MeatAvailableKG: 1, m_Condition: 100}}");
