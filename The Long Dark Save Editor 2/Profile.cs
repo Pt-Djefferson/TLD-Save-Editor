@@ -21,11 +21,15 @@ namespace The_Long_Dark_Save_Editor_2
             this.path = path;
 
             var json = EncryptString.Decompress(File.ReadAllBytes(path));
-            //Temporary cut raw data from json cause m_StatsDictionary doesn`t fit JSON format.
-            json = Regex.Replace(json, @"\""m_AllTimeStats\"":\""\[[^\]]*\]\""", delegate (Match match)
+
+            json = Regex.Replace(json, @"(\\*\""m_StatsDictionary\\*\"":\{)((?:[-0-9\.]+:\\*\""[-0-9eE\.]+\\*\""\,?)+)(\})", delegate (Match match)
             {
-                rawAllTimeStats = match.ToString();
-                return @"""m_AllTimeStats"":""""";
+                string jsonSubStr = Regex.Replace(match.Groups[2].ToString(), @"([-0-9]+):(\\*\"")", delegate (Match matchSub)
+                {
+                    var escapeStr = matchSub.Groups[2].ToString();
+                    return escapeStr + matchSub.Groups[1].ToString() + escapeStr + @":" + escapeStr;
+                });
+                return match.Groups[1].ToString() + jsonSubStr + match.Groups[3].ToString();
             });
 
             json = Regex.Replace(json, @"\""m_SandboxRecords\"":\[([^\]]*\]){10}", delegate (Match match)
@@ -40,9 +44,17 @@ namespace The_Long_Dark_Save_Editor_2
         public void Save()
         {
             string json = dynamicState.Serialize();
-            //Turn back cutted raw data.
-            json = Regex.Replace(json, @"\""m_AllTimeStats\"":\""\""", rawAllTimeStats);
-            json = Regex.Replace(json, @"\""m_SandboxRecords\"":\""\""", rawSandboxRecords);
+
+            json = Regex.Replace(json, @"(\\*\""m_StatsDictionary\\*\"":\{)((?:\\*\""[-0-9\.]+\\*\"":\\*\""[-0-9eE\.]+\\*\""\,?)+)(\})", delegate (Match match)
+            {
+                string jsonSubStr = Regex.Replace(match.Groups[2].ToString(), @"\\*\""([-0-9]+)\\*\"":", delegate (Match matchSub)
+                {
+                    return matchSub.Groups[1].ToString() + @":";
+                });
+                string res = match.Groups[1].ToString() + jsonSubStr + match.Groups[3].ToString();
+                return match.Groups[1].ToString() + jsonSubStr + match.Groups[3].ToString();
+            });
+
             //Escape slashes like in original saves
             json = Regex.Replace(json, "/", "\\/");
 
