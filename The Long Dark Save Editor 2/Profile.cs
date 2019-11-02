@@ -32,12 +32,6 @@ namespace The_Long_Dark_Save_Editor_2
                 return match.Groups[1].ToString() + jsonSubStr + match.Groups[3].ToString();
             });
 
-            json = Regex.Replace(json, @"\""m_SandboxRecords\"":\[([^\]]*\]){10}", delegate (Match match)
-            {
-                rawSandboxRecords = match.ToString();
-                return @"""m_SandboxRecords"":""""";
-            });
-
             dynamicState = new DynamicSerializable<ProfileState>(json);
         }
 
