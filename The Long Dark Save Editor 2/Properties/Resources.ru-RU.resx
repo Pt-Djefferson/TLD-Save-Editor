@@ -1362,7 +1362,7 @@
   <data name="AfflictionType_FoodPoisioning" xml:space="preserve">
     <value>Пищевое отравление</value>
   </data>
-  <data name="AfflictionType_SprainedAnkle" xml:space="preserve">
+  <data name="AfflictionType_SprainedAnkle" xml:space="preserve">F
     <value>Вывих лодыжки</value>
   </data>
   <data name="AfflictionType_InfectionRisk" xml:space="preserve">
@@ -1573,7 +1573,7 @@
     <value>Руководство по револьверам</value>
   </data>
   <data name="Backups" xml:space="preserve">
-    <value>Резервирование</value>
+    <value>Резерв</value>
   </data>
   <data name="AfflictionType_FrostbiteDamage" xml:space="preserve">
     <value>Урон он холода</value>
