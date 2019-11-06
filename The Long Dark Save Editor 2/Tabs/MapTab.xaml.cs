@@ -135,6 +135,24 @@ namespace The_Long_Dark_Save_Editor_2.Tabs
 
         private void canvas_MouseMove(object sender, MouseEventArgs e)
         {
+
+            var x = e.GetPosition(mapLayer).X / mapLayer.ActualWidth;
+            var y = e.GetPosition(mapLayer).Y / mapLayer.ActualHeight;
+            x = x > 0 ? x : 0;
+            x = x < 1 ? x : 1;
+            y = y > 0 ? y : 0;
+            y = y < 1 ? y : 1;
+            var x0 = mapLayer.RenderTransformOrigin.X;
+            var y0 = mapLayer.RenderTransformOrigin.Y;
+            var dX = (-1) * (x - x0) * mapLayer.ActualWidth * scaleMap.ScaleX;
+            var dY = (-1) * (y - y0) * mapLayer.ActualHeight * scaleMap.ScaleY;
+
+            label1.Content = @"X: " + x.ToString() + @" Y: " + y.ToString();
+            label2.Content = @"X: " + mapLayer.RenderTransformOrigin.X.ToString() + @" Y: " + mapLayer.RenderTransformOrigin.Y.ToString();
+
+            //translateMap.X += dX;
+            //translateMap.Y += dY;
+            mapLayer.RenderTransformOrigin = new Point(x, y);
             /*
             if (mapInfo == null) return;
 
@@ -159,14 +177,34 @@ namespace The_Long_Dark_Save_Editor_2.Tabs
 
             //mapLayer.RenderTransformOrigin.X. = e.GetPosition(mapLayer).X;
             //mapLayer.RenderTransformOrigin.Y = e.GetPosition(mapLayer).X;
+            var x0 = mapLayer.RenderTransformOrigin.X;
+            var y0 = mapLayer.RenderTransformOrigin.Y;
             var x = e.GetPosition(mapLayer).X / mapLayer.ActualWidth;
             var y = e.GetPosition(mapLayer).Y / mapLayer.ActualHeight;
             x = x > 0 ? x : 0;
             x = x < 1 ? x : 1;
             y = y > 0 ? y : 0;
             y = y < 1 ? y : 1;
-            //label1.Content += @"X: " + x.ToString() + @" Y: " + y.ToString();
-            //mapLayer.RenderTransformOrigin = new Point(x, y);
+            var dX = (x - x0) * mapLayer.ActualWidth * (scaleMap.ScaleX);
+            var dY = (y - y0) * mapLayer.ActualHeight * (scaleMap.ScaleY);
+            label1.Content = @"X: " + x.ToString() + @" Y: " + y.ToString();
+            //translateMap.X -= dX;
+            ////translateMap.X = mapLayer.ActualWidth * dX / 2;
+            //translateMap.Y -= dY;
+            ////translateMap.Y = mapLayer.ActualHeight * dY / 2;
+            //var poi = new Point(translateMap.X, translateMap.Y);
+            
+            var poi0 = mapLayer.PointToScreen(e.GetPosition(mapLayer));
+
+            //var canvasX = Canvas.GetLeft(mapLayer);
+            //var canvasY = Canvas.GetTop(mapLayer);
+            mapLayer.RenderTransformOrigin = new Point(x, y);
+
+            var poi1 = mapLayer.PointToScreen(e.GetPosition(mapLayer));
+            translateMap.X += poi1.X - poi0.X;
+            translateMap.Y += poi1.Y - poi0.Y;
+            //Canvas.SetLeft(mapLayer, canvasX);
+            //Canvas.SetTop(mapLayer, canvasY);
             scaleMap.ScaleX += zoom;
             scaleMap.ScaleY += zoom;
 

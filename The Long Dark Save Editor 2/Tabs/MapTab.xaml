@@ -23,13 +23,13 @@
     </UserControl.Resources>
     <Canvas x:Name="canvas" MouseWheel="canvas_MouseWheel" ClipToBounds="True" MouseMove="canvas_MouseMove"  
             MouseLeftButtonUp="canvas_MouseLeftButtonUp" MouseLeftButtonDown="canvas_MouseLeftButtonDown" Width="{Binding ActualWidth, ElementName=userControl, Mode=OneWay}" Height="{Binding ActualHeight, ElementName=userControl, Mode=OneWay}" Background="White">
-        <Viewbox x:Name="mapLayer" Height="{Binding ActualHeight, ElementName=mapImage, Mode=OneWay}" Width="{Binding ActualWidth, ElementName=mapImage, Mode=OneWay}" RenderTransformOrigin="0.2,0.2">
+        <Viewbox x:Name="mapLayer" Height="{Binding ActualHeight, ElementName=mapImage, Mode=OneWay}" Width="{Binding ActualWidth, ElementName=mapImage, Mode=OneWay}" RenderTransformOrigin="0.2,0.5">
             <Viewbox.RenderTransform>
                 <TransformGroup>
-                    <ScaleTransform x:Name="scaleMap" ScaleY="0.5" ScaleX="0.5"/>
+                    <ScaleTransform x:Name="scaleMap" ScaleX=".9" ScaleY=".9"/>
                     <SkewTransform/>
                     <RotateTransform/>
-                    <TranslateTransform x:Name="translateMap"/>
+                    <TranslateTransform x:Name="translateMap" X="0" Y="0"/>
                 </TransformGroup>
             </Viewbox.RenderTransform>
             <Canvas Width="{Binding ActualWidth, ElementName=mapImage, Mode=OneWay}" Height="{Binding ActualHeight, ElementName=mapImage, Mode=OneWay}">
@@ -50,6 +50,16 @@
                     <SkewTransform/>
                     <RotateTransform/>
                     <TranslateTransform Y="50"/>
+                </TransformGroup>
+            </Label.RenderTransform>
+        </Label>
+        <Label x:Name="label3" HorizontalAlignment="Left" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5" Content="------------------------------ .">
+            <Label.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform/>
+                    <TranslateTransform Y="100"/>
                 </TransformGroup>
             </Label.RenderTransform>
         </Label>
