@@ -118,12 +118,7 @@ namespace The_Long_Dark_Save_Editor_2.Tabs
             canvas.ReleaseMouseCapture();
             if (e.GetPosition(canvas) == clickPosition)
             {
-                var x = e.GetPosition(mapImage).X;
-                var y = e.GetPosition(mapImage).Y;
-
-                playerPosition.X = (x - mapInfo.origo.X) / mapInfo.pixelsPerCoordinate;
-                playerPosition.Y = (y - mapInfo.origo.Y) / -mapInfo.pixelsPerCoordinate;
-
+                playerPosition = mapInfo.RegionCoords(e.GetPosition(mapImage));
                 UpdatePlayerPosition();
 
                 MainWindow.Instance.CurrentSave.Global.PlayerManager.m_SaveGamePosition[0] = (float)playerPosition.X;
@@ -169,15 +164,13 @@ namespace The_Long_Dark_Save_Editor_2.Tabs
 
         private void UpdatePlayerPosition()
         {
-            var x = playerPosition.X * mapInfo.pixelsPerCoordinate + mapInfo.origo.X;
-            var y = playerPosition.Y * (-mapInfo.pixelsPerCoordinate) + mapInfo.origo.Y;
-            UpdatePlayerPosition(x, y);
+            UpdatePlayerPosition(mapInfo.LayerCoords(playerPosition));
         }
 
-        private void UpdatePlayerPosition(double x, double y)
+        private void UpdatePlayerPosition(Point layerPoint)
         {
-            Canvas.SetLeft(player, x);
-            Canvas.SetTop(player, y);
+            Canvas.SetLeft(player, layerPoint.X);
+            Canvas.SetTop(player, layerPoint.Y);
         }
 
         private void UserControl_Loaded(object sender, RoutedEventArgs e)
