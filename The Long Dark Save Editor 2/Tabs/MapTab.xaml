@@ -21,14 +21,12 @@
         <Image x:Key="RiverValleyRegion" Source="../Images/HushedRiverValleySF.png"/>
 
     </UserControl.Resources>
-    <Canvas x:Name="canvas" Background="White" ClipToBounds="True" Height="{Binding ActualHeight, ElementName=userControl, Mode=OneWay}" MouseLeftButtonDown="canvas_MouseLeftButtonDown" MouseWheel="canvas_MouseWheel" MouseMove="canvas_MouseMove"  
-        MouseLeftButtonUp="canvas_MouseLeftButtonUp" Width="{Binding ActualWidth, ElementName=userControl, Mode=OneWay}" >
+    <Canvas x:Name="canvas" Height="{Binding ActualHeight, ElementName=userControl, Mode=OneWay}" MouseLeftButtonDown="canvas_MouseLeftButtonDown" MouseWheel="canvas_MouseWheel" MouseMove="canvas_MouseMove"  
+        MouseLeftButtonUp="canvas_MouseLeftButtonUp" Width="{Binding ActualWidth, ElementName=userControl, Mode=OneWay}" ClipToBounds="True" Background="#00000000" >
         <Viewbox x:Name="mapLayer" Height="{Binding ActualHeight, ElementName=mapImage, Mode=OneWay}" Width="{Binding ActualWidth, ElementName=mapImage, Mode=OneWay}" RenderTransformOrigin="0,0">
             <Viewbox.RenderTransform>
                 <TransformGroup>
                     <ScaleTransform x:Name="scaleMap" ScaleX=".5" ScaleY=".5"/>
-                    <SkewTransform/>
-                    <RotateTransform/>
                     <TranslateTransform x:Name="translateMap" X="0" Y="0"/>
                 </TransformGroup>
             </Viewbox.RenderTransform>
