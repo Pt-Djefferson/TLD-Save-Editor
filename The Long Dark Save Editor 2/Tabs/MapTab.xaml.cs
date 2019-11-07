@@ -154,10 +154,8 @@ namespace The_Long_Dark_Save_Editor_2.Tabs
             
             var x = e.GetPosition(mapLayer).X / mapLayer.ActualWidth;
             var y = e.GetPosition(mapLayer).Y / mapLayer.ActualHeight;
-            x = x > 0 ? x : 0;
-            x = x < 1 ? x : 1;
-            y = y > 0 ? y : 0;
-            y = y < 1 ? y : 1;
+            x = Math.Max(Math.Min(x, 1), 0);
+            y = Math.Max(Math.Min(y, 1), 0);
             var dX = (x - mapLayer.RenderTransformOrigin.X) * mapLayer.ActualWidth * (1 - scaleMap.ScaleX);
             var dY = (y - mapLayer.RenderTransformOrigin.Y) * mapLayer.ActualHeight * (1 - scaleMap.ScaleY);
 
