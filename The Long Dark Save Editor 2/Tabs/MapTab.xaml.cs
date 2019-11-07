@@ -98,7 +98,6 @@ namespace The_Long_Dark_Save_Editor_2.Tabs
             scaleMap.ScaleX = Math.Max(Math.Min(wScale, hScale), 0.5);
             scaleMap.ScaleY = Math.Max(Math.Min(wScale, hScale), 0.5);
 
-            //SetPosition(0, 0);
             UpdatePlayerPosition();
         }
 
@@ -169,20 +168,7 @@ namespace The_Long_Dark_Save_Editor_2.Tabs
             scaleMap.ScaleX += zoom;
             scaleMap.ScaleY += zoom;
         }
-        /*
-        private void SetPosition(double x, double y)
-        {
-            Canvas.SetLeft(mapImage, x);
-            Canvas.SetTop(mapImage, y);
 
-            UpdatePlayerPosition(x, y);
-
-            if (MainWindow.Instance.CurrentSave == null)
-                return;
-            MainWindow.Instance.CurrentSave.Global.PlayerManager.m_SaveGamePosition[0] = (float)playerPosition.X;
-            MainWindow.Instance.CurrentSave.Global.PlayerManager.m_SaveGamePosition[2] = (float)playerPosition.Y;
-        }
-        */
         private void UpdatePlayerPosition()
         {
             var x = playerPosition.X * mapInfo.pixelsPerCoordinate + mapInfo.origo.X;
