@@ -1585,10 +1585,10 @@
     <value>4 days of night badges unlocked</value>
   </data>
   <data name="GEAR_BlueFlare" xml:space="preserve">
-    <value>Marine flare</value>
+    <value>Marine Flare</value>
   </data>
   <data name="GEAR_BookGunsmithing" xml:space="preserve">
-    <value>Practical gunsmithing</value>
+    <value>Practical Gunsmithing</value>
   </data>
   <data name="GEAR_Bullet" xml:space="preserve">
     <value>Bullet</value>
