@@ -2,6 +2,7 @@ using System;
 using System.Globalization;
 using System.IO;
 using System.Linq;
+using System.Text.RegularExpressions;
 using The_Long_Dark_Save_Editor_2.Game_data;
 using The_Long_Dark_Save_Editor_2.Helpers;
 using The_Long_Dark_Save_Editor_2.Serialization;
@@ -42,6 +43,29 @@ namespace The_Long_Dark_Save_Editor_2
             dynamicGlobal = new DynamicSerializable<GlobalSaveGameFormat>(globalJson);
 
             Afflictions = new AfflictionsContainer(Global);
+            /*
+            byte[] array = File.ReadAllBytes(@"C:\temp\TLD\resources.assets");
+            string str = "";
+            //byte[] array1;
+            for (int i = 0; i < array.Length; i++)
+            {
+                if ((array[i] >= 32) && (array[i] < 127)) {
+                    //str = str + array[i].ToString();
+                }
+                else { array[i] = 32; }
+            }
+            */
+            /*
+            var str = File.ReadAllText(@"C:\temp\TLD\resources.txt");
+            string str1 = "";
+            var str2 = Regex.Replace(str, @"(GEAR_[0-9A-Za-z_-]*)", delegate (Match match)
+            {
+                str1 += match.Groups[1].ToString() + "\r\n";
+                return "";
+            });
+            */
+            //File.WriteAllBytes(@"C:\temp\TLD\resources.txt",array);
+            //File.WriteAllText(@"C:\temp\TLD\resources1.txt", str1);
         }
 
         public void Save()
@@ -52,7 +76,12 @@ namespace The_Long_Dark_Save_Editor_2
             var bootSerialized = dynamicBoot.Serialize();
             SlotData.m_Dict["boot"] = EncryptString.Compress(bootSerialized);
 
-            if(Boot.m_SceneName.Value != OriginalRegion)
+            var greyJson = EncryptString.Decompress(SlotData.m_Dict["GreyMothersHouseA"]);
+            System.IO.File.WriteAllText(@"C:\temp\TLD\GreyMotherHouseA.txt", greyJson);
+            greyJson = System.IO.File.ReadAllText(@"C:\temp\TLD\GreyMotherHouseA.txt");
+            SlotData.m_Dict["GreyMothersHouseA"] = EncryptString.Compress(greyJson);
+
+            if (Boot.m_SceneName.Value != OriginalRegion)
             {
                 Global.GameManagerData.SceneTransition.m_ForceNextSceneLoadTriggerScene = null;
             }

@@ -50,6 +50,8 @@ namespace The_Long_Dark_Save_Editor_2.Helpers
             AddItemInfo("GEAR_BirchbarkPrepared", ItemCategory.FirstAid, @"{""StackableItem"": {""m_UnitsProxy"": 1}}");
             AddItemInfo("GEAR_BirchbarkTea", ItemCategory.FirstAid, @"{""FoodItem"": {""m_CaloriesRemainingProxy"": 125}}");
 
+            AddItemInfo("GEAR_Accelerantgunpowder", ItemCategory.Clothing, @"{""ClothingItem"": {}}");
+
             // Clothing
             AddItemInfo("GEAR_Balaclava", ItemCategory.Clothing, @"{""ClothingItem"": {}}");
             AddItemInfo("GEAR_BaseballCap", ItemCategory.Clothing, @"{""ClothingItem"": {}}");
